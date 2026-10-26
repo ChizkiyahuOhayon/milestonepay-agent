@@ -51,7 +51,7 @@ class Handler(BaseHTTPRequestHandler):
             real_adapter = type(flow.paypal) is PayPal
             configured = real_adapter and flow.paypal.configured
             payment_status = ('Fake payment service · no Sandbox connection' if not real_adapter else
-                'Sandbox credentials present · connection unverified · lifecycle acceptance pending' if configured else
+                'Sandbox credentials present · check individual operation receipts' if configured else
                 'Sandbox credentials missing · confirm terms and use AI advice')
             return self.send({'csrf': self.server.csrf, 'state': flow.state(),
                 'sandbox_configured': configured, 'payment_status': payment_status,

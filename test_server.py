@@ -161,11 +161,11 @@ class ServerTests(unittest.TestCase):
                     self.assertFalse(result['sandbox_configured'])
                     self.assertEqual(result['payment_status'], 'Sandbox credentials missing · confirm terms and use AI advice')
 
-    def test_present_credentials_are_explicitly_unverified_without_network(self):
+    def test_present_credentials_do_not_claim_connection_or_acceptance(self):
         real = PayPal(self.paypal.database)
         with patch.object(self.server.flow, 'paypal', real), patch.dict(os.environ, {
                 'PAYPAL_CLIENT_ID': 'test-id', 'PAYPAL_CLIENT_SECRET': 'test-secret'}, clear=True), patch('paypal.urllib.request.urlopen') as network:
             result = self.request('GET', '/api/state')[1]
             self.assertTrue(result['sandbox_configured'])
-            self.assertEqual(result['payment_status'], 'Sandbox credentials present · connection unverified · lifecycle acceptance pending')
+            self.assertEqual(result['payment_status'], 'Sandbox credentials present · check individual operation receipts')
             network.assert_not_called()

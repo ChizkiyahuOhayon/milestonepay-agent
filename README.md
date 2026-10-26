@@ -1,6 +1,6 @@
 # MilestonePay Agent
 
-A local workspace for freelancers and clients to agree milestone terms and review payment requests with advisory AI. **Private release candidate; real PayPal Sandbox acceptance is pending.**
+A local workspace for freelancers and clients to agree milestone terms and review payment requests with advisory AI. **Private release candidate; real PayPal Sandbox lifecycle checks passed on 2026-10-26.**
 
 ## Problem and audience
 
@@ -8,7 +8,7 @@ The project addresses a specific coordination problem: a freelancer and client n
 
 ## What is available locally
 
-- An English, four-step workspace: Agree, Reserve, Deliver, and Release / return, with an advisory panel and audit timeline. Payment integration acceptance remains pending.
+- An English, four-step workspace: Agree, Reserve, Deliver, and Release / return, with an advisory panel and audit timeline. Real Sandbox checks covered authorization/capture, authorization/void, and partial then remaining-balance refunds.
 - Human-entered milestone titles, amounts, EUR/USD currency and acceptance criteria, with server validation of amounts and totals. Each saved plan has a version.
 - Optional AI questions about missing or conflicting terms, plain-language payment explanations, and a criterion-by-criterion comparison of delivery **notes**: Met, Uncertain, or Not met. A valid next-action suggestion highlights an allowed action for the human to choose.
 - Server-owned payment proposals: the browser supplies an action and milestone reference; the server derives the version, amount and currency from saved terms. Sending a request requires explicit human confirmation and a short-lived, one-use permission bound to those terms.
@@ -23,7 +23,7 @@ flowchart LR
     APP --> WF[Workflow and one-use permissions]
     WF --> DB[(Local SQLite state and audit)]
     WF --> PP[PayPal Sandbox adapter]
-    PP -->|Acceptance pending| SB[PayPal Sandbox API]
+    PP -->|Sandbox requests and receipts| SB[PayPal Sandbox API]
     UI -->|Advice request| APP
     APP --> AD[Advisory module]
     AD --> OL[Local Ollama qwen3:4b]
@@ -73,9 +73,9 @@ PAYPAL_CLIENT_ID=your_sandbox_client_id
 PAYPAL_CLIENT_SECRET=your_sandbox_client_secret
 ```
 
-Restart the app after configuration. Do not put buyer passwords in this file, commit credentials, or use production credentials. Without both values the status says credentials are missing. Present values are labelled **connection unverified**; their presence does not establish API access. An injected fake service is labelled **Fake payment service · no Sandbox connection**.
+Restart the app after configuration. Do not put buyer passwords in this file, commit credentials, or use production credentials. Without both values the status says credentials are missing. Present values are labelled **check individual operation receipts**; their presence does not establish API access. An injected fake service is labelled **Fake payment service · no Sandbox connection**.
 
-**Real Sandbox payment acceptance is pending.** The release candidate provides setup instructions, not a recorded payment demonstration. A separate real Sandbox acceptance run is required before adding payment lifecycle footage or corresponding outcome claims. Judge access arrangements and any private test access remain for the author to finalize before submission; do not publish secrets in the repository.
+**Real Sandbox checks passed on 2026-10-26:** EUR8 authorization/capture; EUR2 authorization/void; and EUR4 capture followed by EUR1 partial and EUR3 remaining-balance refunds. Independent GET requests confirmed the capture, void and refund states. These were virtual Sandbox transactions, not live payments. Judge access arrangements and any private test access remain for the author to finalize before submission; do not publish secrets in the repository.
 
 ## AI use and limitations
 
