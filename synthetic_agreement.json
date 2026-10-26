@@ -1,0 +1,17 @@
+{
+  "synthetic": true,
+  "currency": "EUR",
+  "total": "100.30",
+  "milestones": [
+    {
+      "id": "m1",
+      "title": "Synthetic storyboard review",
+      "amount": "30.10"
+    },
+    {
+      "id": "m2",
+      "title": "Synthetic final delivery",
+      "amount": "70.20"
+    }
+  ]
+}

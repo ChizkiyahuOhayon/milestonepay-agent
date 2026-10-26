@@ -1,0 +1,17 @@
+.env
+.env.*
+.local/
+__pycache__/
+*.pyc
+*.log
+*.sqlite3
+*.gguf
+models/
+.DS_Store
+preflight/
+eval/
+evidence/
+notes/
+run-*/
+*.tar
+*.zip
