@@ -123,11 +123,13 @@ class ServerTests(unittest.TestCase):
         self.plan()
         with patch('advisory.urllib.request.urlopen') as mocked:
             mocked.return_value.__enter__.return_value.read.return_value = json.dumps({'message': {
-                'content': 'capture now', 'tool_calls': [{'function': {'name': 'capture', 'arguments': {}}}]}}).encode()
+                'content': json.dumps({'text': 'capture now'}), 'tool_calls': [{'function': {'name': 'capture', 'arguments': {}}}]}}).encode()
             before = self.server.flow.state()
             result = self.post('/api/ai', {'feature': 'terms', 'question': 'Explain these terms', 'milestone': 'drawing', 'operation': 'authorize'})
             self.assertNotIn('tools', json.loads(mocked.call_args.args[0].data))
         self.assertFalse(result['payment_sent'])
+        self.assertEqual(result['source'], 'local_ai')
+        self.assertEqual(result['text'], 'capture now')
         self.assertEqual(self.server.flow.state(), before)
         self.assertEqual(self.paypal.calls, [])
         self.assertEqual([e['kind'] for e in self.request('GET', '/api/audit')[1]][-2:], ['ai_request', 'ai_response'])

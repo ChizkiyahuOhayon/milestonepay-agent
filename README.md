@@ -60,7 +60,7 @@ OLLAMA_HOST=127.0.0.1:11435 ollama pull qwen3:4b
 OLLAMA_HOST=127.0.0.1:11435 ollama list
 ```
 
-The download command is an operator setup step; the app does not download models, manage the Ollama service, or call a paid AI endpoint. Prompts use qwen3:4b with temperature 0, seed 42, 8192 context and a 1024-token output cap. Local inference may fail or be slow; the fallback works without a model. Setup references: [Ollama host configuration](https://docs.ollama.com/faq), [qwen3:4b](https://ollama.com/library/qwen3:4b).
+The download command is an operator setup step; the app does not download models, manage the Ollama service, or call a paid AI endpoint. The three advisory features use qwen3:4b JSON-schema output with temperature 0, seed 42, 8192 context, a 768-token output cap and a 60-second timeout. Next-action suggestions retain their separate tool-call configuration and 1024-token cap. Local inference may fail or be slow; the fallback works without a model. Setup references: [Ollama host configuration](https://docs.ollama.com/faq), [qwen3:4b](https://ollama.com/library/qwen3:4b).
 
 ### Sandbox accounts and local credentials
 
@@ -91,6 +91,6 @@ Codex assisted with code, tests, interface, prompts and documentation. Claude su
 - AI compares text notes, not uploaded files. Semantic quality and real-user outcomes have not been established. Local tests use deterministic fake responses and do not establish real Sandbox payment acceptance.
 - The audit is a local SQLite record, not tamper-proof storage. Desktop use has been inspected locally; mobile devices have not been tested.
 
-## License — draft, pending author confirmation
+## License
 
-[LICENSE](LICENSE) contains a proposed MIT license for author review. **Zhao Liu has not yet confirmed this license or authorized publication.** This local candidate is a review package; the MIT draft is not a statement that a public release has occurred. Third-party tools and model weights retain their own licenses.
+[MIT License](LICENSE). Copyright 2026 Zhao Liu. Third-party tools and model weights retain their own licenses.
