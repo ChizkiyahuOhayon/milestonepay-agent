@@ -75,7 +75,7 @@ PAYPAL_CLIENT_SECRET=your_sandbox_client_secret
 
 Restart the app after configuration. Do not put buyer passwords in this file, commit credentials, or use production credentials. Without both values the status says credentials are missing. Present values are labelled **check individual operation receipts**; their presence does not establish API access. An injected fake service is labelled **Fake payment service · no Sandbox connection**.
 
-**Real Sandbox checks passed on 2026-10-26:** EUR8 authorization/capture; EUR2 authorization/void; and EUR4 capture followed by EUR1 partial and EUR3 remaining-balance refunds. Independent GET requests confirmed the capture, void and refund states. These were virtual Sandbox transactions, not live payments. Judge access arrangements and any private test access remain for the author to finalize before submission; do not publish secrets in the repository.
+**Real Sandbox checks passed on 2026-10-26:** EUR8 authorization/capture; EUR2 authorization/void; and EUR4 capture followed by EUR1 partial and EUR3 remaining-balance refunds. Independent GET requests confirmed the capture, void and refund states. These were virtual Sandbox transactions, not live payments. Judges and other reviewers should use their own free PayPal Sandbox app and Sandbox personal buyer account, as described above. The app runs fully without credentials or a model; payment steps then show credentials as missing.
 
 ## AI use and limitations
 
